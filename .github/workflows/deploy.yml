@@ -25,6 +25,9 @@ jobs:
     - name: Build project
       run: npm run build
 
+    - name: Configure Git credentials
+      run: echo "//github.com/$(git config user.email).git" > ~/.netrc
+
     - name: Configure Git user identity
       run: |
         git config --global user.email "mhusein463@gmail.com"
