@@ -1,7 +1,9 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
+import { addNote } from "../utils/local-data";
+import { useNavigate } from "react-router-dom";
 
-export default function AddNoteBox({ notes, setNotes }) {
+export default function AddNoteBox() {
+  const navigate = useNavigate();
   const [noteForm, setNoteForm] = useState({
     title: "",
     body: "",
@@ -21,24 +23,19 @@ export default function AddNoteBox({ notes, setNotes }) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setNotes([
-      ...notes,
-      {
-        id: notes.length ? notes.at(-1).id + 1 : 1,
-        title: noteForm.title,
-        body: noteForm.body,
-        createdAt: new Date().toISOString(),
-      },
-    ]);
 
-    setNoteForm({
-      title: "",
-      body: "",
-    });
+    addNote(noteForm);
+
+    // setNoteForm({
+    //   title: "",
+    //   body: "",
+    // });
+
+    navigate("/");
   };
 
   return (
-    <div className="container lg:px-44 py-20 mx-auto">
+    <div className="container lg:px-44 my-9 mx-auto">
       <h1 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Buat Catatan</h1>
 
       <form onSubmit={submitHandler} className="flex flex-col">
