@@ -66,7 +66,7 @@ function addNote({ title, body }) {
   notes = [
     ...notes,
     {
-      id: notes.at(-1).id + 1,
+      id: notes?.at(-1)?.id + 1 || 1,
       title: title || "(untitled)",
       body,
       createdAt: new Date().toISOString(),
